@@ -87,7 +87,7 @@ ggplot(vis_educ, aes(x=year, y=value, fill=year)) + geom_violin() + facet_wrap(~
 ```
 
 
-Violin plots of the complete set of variables in the electorate profiles can be found in the appendix \@ref(ch:appendix), (see \@ref(fig:vis-census1),\@ref(fig:vis-census2),\@ref(fig:vis-census3),\@ref(fig:vis-census4)).
+Violin plots of the complete set of variables in the electorate profiles can be found in the appendix (see \@ref(fig:vis-census1),\@ref(fig:vis-census2),\@ref(fig:vis-census3),\@ref(fig:vis-census4)).
 
 ##### A note on Census non-response
 
