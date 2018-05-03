@@ -77,7 +77,7 @@ ggplot(vis_relig, aes(x=year, y=value, fill=year)) + geom_violin() + facet_wrap(
 
 #### Investing in education
 
-Australia has seen improvements in education outcomes across the board, experiencing continual increases in secondary and tertiary competion rates across the years (Figure \@ref(fig:vis-educ)). It is encouraging to see that no electorates appear to be lagging behind, as the minimum values increase each year for all levels of education.
+Australia has seen improvements in education outcomes across the board, experiencing continual increases in secondary and tertiary competion rates across the years (figure \ref(fig:vis-educ)). It is encouraging to see that no electorates appear to be lagging behind, as the minimum values increase each year for all levels of education.
 
 ```{r vis-educ, fig.asp = 0.2, fig.cap="Education profile of Australian electorates"}
 vis_educ <- vis_df %>%
@@ -87,7 +87,7 @@ ggplot(vis_educ, aes(x=year, y=value, fill=year)) + geom_violin() + facet_wrap(~
 ```
 
 
-Violin plots of the complete set of variables in the electorate profiles can be found in the appendix, see \@ref(fig:vis-census).
+Violin plots of the complete set of variables in the electorate profiles can be found in the appendix \@ref(ch:appendix), (see \@ref(fig:vis-census1),\@ref(fig:vis-census2),\@ref(fig:vis-census3),\@ref(fig:vis-census4)).
 
 ##### A note on Census non-response
 
@@ -180,7 +180,7 @@ plot(cens_bris_poly, border = rgb(1, .1, .1), lty=1, lwd=1, ylim = c(-27.53, -27
 
 5. For each of the $k$ closest Census divisions, determine the area of intersection with the election division.
 
-Continuing with Brisbane from 2013, we see the area of overlap each of Brisbane, Griffith and Lilley from the 2011 boundaries, given by the shaded blue region (Figure \@ref(fig:bris-ints)).
+Continuing with Brisbane from 2013, we see the area of overlap each of Brisbane, Griffith and Lilley from the 2011 boundaries, given by the shaded blue region (figure \@ref(fig:bris-ints)).
 
 In general, this would be done between the Brisbane (2013) and every one of its $k$ nearest 2011 divisions.
 
@@ -205,7 +205,6 @@ Brisbane (election, 2013) is made up of $143,602$ people from Brisbane (Census, 
 For example, estimating percentage of people who are Australian citizens for the superimposed Brisbane (2013) election boundary is done by a weighted average of its intersection with Lilley and Brisbane.
 
 Let $C_{s,t}$ be the percentage of Australian citizens in Divison $s$ at time $t$, where $t \in \{\text {Election, Census}\}$
-
 $$\hat{C}_{Bris,Election} = \frac{C_{Bris,Census} \cdot P_{Bris} + C_{Lill,Census} \cdot P_{Lill}}{P_{Bris} + P_{Lill}}$$
 
 8. Repeat steps 4-7 for each election division.
@@ -218,7 +217,5 @@ Adding a subscript $y$ to $C_{s,t}$ to denote year, $C_{s,t,y}$.
 
 $$\hat{C}_{Bris,Election,2013} = \frac{2}{5} \cdot \hat{C}_{Bris,Election,2011} + \frac{3}{5} \cdot \hat{C}_{Bris,Election,2016}$$
 
-
-\todo[inline]{I don't like using multiple characters to represent one thing in an equation. It would be better to have $P$ for population, $A$ for area, etc. Using multiple characters can be ambiguous. This would also avoid the problem of overhang in the equations.}
 
 
