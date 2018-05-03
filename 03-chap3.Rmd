@@ -170,7 +170,7 @@ Now consider only the division "Brisbane" in the 2013 election. The polygon for 
 
 Note: $k = 3$ is chosen here to illustrate how the algorithm functions. The selection of $k$ depends on the properties of the two maps. We see here that $k = 3$ is a sufficient choice, because there do not appear to be parts of the 2013 division that sit outside of the 3 nearest divisions, but this may not be the case for other 2013 divisions. For this study, $k=35$ is chosen due to the variation in sizes of the divisions, as a neighbouring division can be very large and have a distant centroid.
 
-```{r bris-k3, fig.align='center', fig.cap="Brisbane and the k=3 closest divisions.", message=FALSE, warning=FALSE, out.width="70%"}
+```{r bris-k3, fig.align='center', fig.cap="Brisbane (2013) and the k=3 closest Census (2011) divisions.", message=FALSE, warning=FALSE, out.width="70%"}
 plot(cens_bris_poly, border = rgb(1, .1, .1), lty=1, lwd=1, ylim = c(-27.53, -27.28), xlim = c(153,153.102)) +
   plot(cens_grif_poly, border = rgb(1, .1, .1), lty=1, lwd=1, add = TRUE) +
   plot(cens_lill_poly, border = rgb(1, .1, .1), lty=1, lwd=1, add = TRUE) +
@@ -190,26 +190,33 @@ knitr::include_graphics("data/Brisbane-Intersect.jpeg")
 
 6. Calculate the number of people each intersect represents.
 
-We see that the shaded intersection areas are only a piece of their 2011 Census division. The population of Lilley (2011) is
-$145,652$, and the intersection with Brisbane (2013) is approximately $2.22\%$ of the total area in Lilley, so the population captured by the shaded area is $3,233$. Here we assume population is equally spread throughout each division.
+We see that the shaded intersection areas are only a piece of their 2011 Census division. The population of Lilley (2011) is $145,652$, and the intersection with Brisbane (2013) is approximately $2.22\%$ of the total area in Lilley, so the population captured by the shaded area is $3,233$. Here we assume population is equally spread throughout each division.
 
-$$PopulationInt_{Lill} = \frac{Area_{intersect}}{Area_{Lill}} \cdot Population_{Lill} = 0.222 \cdot 145,652 \approx 3233$$
+Let $AI_w$ denote the area contained in the intersection of Census division $w$ with the superimposed Brisbane (2013) boundary, $P_w$ denote the population of division $w$ contained within that area, $A_w$ be the total area of the Census division $w$ and $T_w$ be the total population of the Census division $w$.
+
+$$P_{Lill} = \frac{AI_{Lill}}{A_{Lill}} \cdot T_{Lill} = 0.222 \cdot 145,652 \approx 3233$$
 
 The intersection of Brisbane and Brisbane equates to 99.00% of the 2011 Brisbane division. Brisbane (2011) has a population of $145,051$, so intersection represents approximately $143,602$ people. There is no overlap with Griffith (2011).
 
 7. Determine the socio-demographic profile based on the people in each intersection, where each person assumes the demographic composition of their Census division.
 
-Brisbane (election, 2013) is made up of $143,602$ people from Brisbane (Census, 2011) and $3,233$ people from Lilley (Census, 2011). To impute each socio-demographic statistic for the Brisbane division (2013), we take a weighted average of the Census demographics, using the intersection populations, $PopulationInt$, used as the weights.
+Brisbane (election, 2013) is made up of $143,602$ people from Brisbane (Census, 2011) and $3,233$ people from Lilley (Census, 2011). To impute each socio-demographic statistic for the Brisbane division (2013), we take a weighted average of the Census demographics, using the intersection populations, $P$, used as the weights.
 
-For example, estimating $AusCitizen$ for the superimposed Brisbane (2013) election boundary is done by a weighted average of its intersection with Lilley and Brisbane.
-$$\hat{AusCitizen_{Bris,Election}} = \frac{AusCitizen_{Bris,Census} \cdot PopulationInt_{Bris} + AusCitizen_{Lill,Census} \cdot PopulationInt_{Lill}}{PopulationInt_{Bris} + PopulationInt_{Lill}}$$
+For example, estimating percentage of people who are Australian citizens for the superimposed Brisbane (2013) election boundary is done by a weighted average of its intersection with Lilley and Brisbane.
+
+Let $C_{s,t}$ be the percentage of Australian citizens in Divison $s$ at time $t$, where $t \in \{\text {Election, Census}\}$
+
+$$\hat{C}_{Bris,Election} = \frac{C_{Bris,Census} \cdot P_{Bris} + C_{Lill,Census} \cdot P_{Lill}}{P_{Bris} + P_{Lill}}$$
 
 8. Repeat steps 4-7 for each election division.
 
 9. Interpolate between the Censuses by year to impute the socio-demographic division profile for the election year.
 
 The 2013 election sits two years after the 2011 Census, and three years before the 2016 Census. Take a weighted average of each demographic across time points for each division.
-$$\hat{AusCitizen_{Bris,Election,2013}} = \frac{2}{5} \cdot \hat{AusCitizen_{Bris,Election,2011}} + \frac{3}{5} \cdot \hat{AusCitizen_{Bris,Election,2016}}$$
+
+Adding a subscript $y$ to $C_{s,t}$ to denote year, $C_{s,t,y}$.
+
+$$\hat{C}_{Bris,Election,2013} = \frac{2}{5} \cdot \hat{C}_{Bris,Election,2011} + \frac{3}{5} \cdot \hat{C}_{Bris,Election,2016}$$
 
 
 \todo[inline]{I don't like using multiple characters to represent one thing in an equation. It would be better to have $P$ for population, $A$ for area, etc. Using multiple characters can be ambiguous. This would also avoid the problem of overhang in the equations.}
