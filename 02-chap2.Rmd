@@ -1,17 +1,15 @@
----
-chapter: 2
-knit: "bookdown::render_book"
----
-# Literature Review {#ch:litreview}
+# Literature review {#ch:litreview}
 
-## Spatial analysis of Australian elections 
+## Spatial analysis of Australian elections
+
 Existing spatial analyses of Australian elections appear to focus on a single federal election, with socio-demographic information pulled from the nearest census. This approach is used in @Stim06, and is adapted to an online e-research platform by @Liao09. Both use GIS to connect Census and election data. However, both Stimson et al. and Liao et al. use information disaggregated to polling booth locations - a greater level of disaggregation than electorates, which the grouping of focus of this study.
 
 Seemingly vacant in Australian studies is the examination of these socio-political relationships over time. It appears that no study has either attempted to create a collection of socio-demographics for multiple elections, or connect information from multiple censuses to a single election - an approach that will be explored for the election years in which a Census does not fall.
 
-A popular approach in single-election studies is to focus analysis on a single electoral division [@Forrest01], or a particular political party [@Davis98]. @Stim12 expand on this by modelling relationships between population variables and voter support for political parties, using univariate visualisations, linear regressions, summary statistics and discriminant analysis. Discriminant analysis is also used by @Stim06 because it aims to distinguish between political parties in their voter support, rather than predict how areas would vote. 
+A popular approach in single-election studies is to focus analysis on a single electoral division [@Forrest01], or a particular political party [@Davis98]. @Stim12 expand on this by modelling relationships between population variables and voter support for political parties, using univariate visualisations, linear regressions, summary statistics and discriminant analysis. Discriminant analysis is also used by @Stim06 because it aims to distinguish between political parties in their voter support, rather than predict how areas would vote.
 
 ## Modelling with compositional data
+
 In order to answer research questions (1) and (2), this study focuses on regression models for inference and prediction. Response variables for these questions are non-negative and sum to unit, making them compositional with $D$ components [@PG11].
 
 The two popular approaches to modelling compositional data are by way of logratio analysis, and the Dirichlet distribution.

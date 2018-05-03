@@ -1,7 +1,3 @@
----
-knit: "bookdown::render_book"
----
-
 # Preface {-}
 
 This document is a research proposal, intended for submission as part of the journey that is EBS Honours 2018.
@@ -9,3 +5,5 @@ This document is a research proposal, intended for submission as part of the jou
 The research proposed is an examination of the relationships that exist between socio-demographics and voting behaviour in Australian federal elections, and how this has changed over time. Considerations are The data used in this study from every election and Census conducted since 2001.
 
 
+
+\clearpage\pagenumbering{arabic}\setcounter{page}{1}

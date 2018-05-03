@@ -1,7 +1,3 @@
----
-knit: "bookdown::render_book"
----
-
 # Acknowledgements {-}
 
 I would like to thank my supervisors Prof. Rob Hyndman and Prof. Di Cook, and all the other Monash EBS staff and students for any teachings, help, motivation and ideas they have provided so far this year.

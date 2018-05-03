@@ -1,9 +1,5 @@
----
-chapter: 5
-knit: "bookdown::render_book"
----
+# A brief reflection and discussion {#ch:ReflectionDiscussion}
 
-# A brief reflection and discussion {#ch:Reflection & Discussion}
 To date, all effort has been directed towards gathering, cleaning and wrangling the data from the ABS and AEC into workable $R$ objects. Navigating the AEC and ABS websites to obtain the vote counts and Census data was relatively straightforward,  although the 2001 election required direct contact with the AEC, as it is not downloadable online. Finding the GIS maps for each event was a little more difficult, but could be sourced from various government websites after some searching.
 
 It was not immediately obvious that imputing socio-demographic profiles at election time would be a new idea. Having not worked with GIS maps, or any spatial data for that matter, understanding the structure of the GIS maps and developing a functioning algorithm has been the latest area of focus.
@@ -11,7 +7,8 @@ It was not immediately obvious that imputing socio-demographic profiles at elect
 Although I have not started running any models, but the investigation into appropriate analyses of compositional data has been very interesting. This too is an area I have not dealt with before. I look forward to applying these techniques.
 
 ## Limitations and improvements
-Estimating electorate profiles with the $k{\text -}centroid \space mapping$ algorithm is a good place to start, but there are undoubtedly improvements that can be made to this approach. Perhaps gathering Census data at a statistical level of aggregation that is lower than electorates, and using these areas to overlay the election map may provide a more accurate imputation of the profiles. 
+
+Estimating electorate profiles with the $k$-centroid mapping algorithm is a good place to start, but there are undoubtedly improvements that can be made to this approach. Perhaps gathering Census data at a statistical level of aggregation that is lower than electorates, and using these areas to overlay the election map may provide a more accurate imputation of the profiles.
 
 Matching polling booths with their Census equivalent, which is done in existing Australian socio-political studies, presents another way to model voter behaviour. However, modelling results at electorate level is still the key point of interest because they determine the results of Australian federal elections.
 

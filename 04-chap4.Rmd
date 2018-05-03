@@ -1,61 +1,58 @@
----
-chapter: 4
-knit: "bookdown::render_book"
----
+# Modelling {#ch:Modelling}
 
-# Modelling {ch: Modelling}
 Now that estimated socio-demographic profiles have been obtained for each election, we begin modelling to answer the questions that were set out in the introduction:
 
 1. What are the demographic factors that affect preference between the two major parties?
-
 2. What factors are linked with electorate support for the full political spectrum?
-
 3. How have these changed over time?
 
 ## Major party preference
+
 Question (1) is concerned with modelling the two party preferred vote, $TPP$, to analyse preference between Labor and Liberal/National parties. Since $TPP_{Labor} + TPP_{Liberal} = 1$, we can focus our models on the response $TPP_Labor$, which sits in the interval $(0,1)$. This can be modelled using a logistic normal distribution:
-
-$$f(TPP) = \frac{1}{\sigma \sqrt{2 \pi}} \frac{1}{TPP(1-TPP)}\exp(-\frac{(logit(TPP)-\mu)^2}{2\sigma^2})$$
-
+$$f(TPP) = \frac{1}{\sigma \sqrt{2 \pi}} \frac{1}{TPP(1-TPP)}\exp(-\frac{(logit(TPP)-\mu)^2}{2\sigma^2}),$$
 where $logit(TPP)$ is the logistic transformation $ln(\frac{TPP}{1-TPP})$.
 
-The mean $\mu$ is a parametric function of the socio-demographics $\bf X$ of each electorate $\mu = f({\bf x})$. We can then use basic regression techniques to estimate the regression coefficients, by way of the $lm()$ function.
+The mean $\mu$ is a parametric function of the socio-demographics $\bm{X}$ of each electorate $\mu = f(\bm{x})$. We can then use basic regression techniques to estimate the regression coefficients, by way of the `lm()` function.
 
 Inference can then be conducted on the output, in order to determine which factors are statistically significant, and their marginal effects on the two party preferred vote.
 
 ## The full spectrum
-In order to model support for all parties, the first preference allocation from the division of prefences is used. Let $\textbf{v}_i = (v_{i1}, v_{i2}, ..., v_{iD})$ denote the vector holding the percentage of first preference votes for parties in electorate $i$, for each of the $D$ parties. This presents an extension to the modelling for the two party preferred vote. 
+
+In order to model support for all parties, the first preference allocation from the division of prefences is used. Let $\bm{v}_i = (v_{i1}, v_{i2}, \dots, v_{iD})$ denote the vector holding the percentage of first preference votes for parties in electorate $i$, for each of the $D$ parties. This presents an extension to the modelling for the two party preferred vote.
 
 The two party preferred vote has $D=2$ parties, so the data is compositional with $D=2$ components. First preference vote has $D>2$ for every electorate in each election, and we still have $\sum_{j=1}^Dv_{ij} = 1$, so we have to consider other avenues for modelling.
 
 Two candidate methods for modelling first preferences are:
 
 - Logratio analysis
-
 - Dirichlet covariate modelling
 
 Both methods will be used to produce models for first preference, and I will draw conclusions based on the consistency of effect that socio-demographics across models.
 
 ### Logratio analysis
-Logratio analysis (Aitchison 1986) uses the transformation of the response $\textbf{v}_i$ to $\textbf{w}_i$, where $\textbf{w}_i \in \mathbb{R}^D$ (or $\mathbb{R}^{D-1}$), so $\dim(\textbf{w}_i) \text{ is } D\times1 \text{ or } (D-1) \times 1$, depending on the transformation method. To obtain $\textbf{w} =  (w_{i1}, w_{i2}, ..., w_{iD})$ or $\textbf{w} =  (w_{i1}, w_{i2}, ..., w_{i(D-1)})$ there are three available mappings: additive, centred and isometric. Each of these mapping techniques will be tested to see which performs best, and which is easily interpretable. 
+
+Logratio analysis (Aitchison 1986) uses the transformation of the response $\bm{v}_i$ to $\bm{w}_i$, where $\bm{w}_i \in \mathbb{R}^D$ (or $\mathbb{R}^{D-1}$), so $\dim(\bm{w}_i) \text{ is } D\times1 \text{ or } (D-1) \times 1$, depending on the transformation method. To obtain $\bm{w} =  (w_{i1}, w_{i2}, \dots, w_{iD})$ or $\bm{w} =  (w_{i1}, w_{i2}, \dots, w_{i(D-1)})$ there are three available mappings: additive, centred and isometric. Each of these mapping techniques will be tested to see which performs best, and which is easily interpretable.
 
 Note that the $D=2$ case using the additive transformation is the same as doing a logistic transform, so answering question (1) is following the same method.
 
-The transformed $\textbf{w}_i$ can be modelled as multivariate normal, $\textbf{w}_i \sim{N({\mu_i}, {\bf \Sigma}})$, where each component has a different mean modelled as a function of socio-demographics, ${\bf\mu}_i = f({\bf x}_i)$. Parametric specifications of $f({\bf x}_i)$ will be used. Further investigation is required into a suitable functions for estimating the coefficients in $f({\bf x}_i)$ and ${\bf \Sigma}$.
+The transformed $\bm{w}_i$ can be modelled as multivariate normal, $\bm{w}_i \sim N(\bm{\mu}_i, \bm{\Sigma})$, where each component has a different mean modelled as a function of socio-demographics, $\bm{\mu}_i = f(\bm{x}_i)$. Parametric specifications of $f(\bm{x}_i)$ will be used. Further investigation is required into a suitable functions for estimating the coefficients in $f(\bm{x}_i)$ and $\bm{\Sigma}$.
 
-More on the three transformation methods can be found in the appendix \ref{ch:appendix}.
+More on the three transformation methods can be found in the appendix \@ref{ch:appendix}.
 
 ### Dirichlet covariate modelling
-A modified version of the Dirichlet distribution [@Campbell87] provides another method of modelling the vector of first preferences. This version, called the Dirichlet covariate model, the parameters of the Dirichlet distribution can be estimated as a function of covariates, $\lambda_j = h_j({\bf x})$.
 
-Dirichlet regression can be done in $R$ using the $DirichReg$ package, and parametric forms of $h({\bf x})$ will be chosen.
+A modified version of the Dirichlet distribution [@Campbell87] provides another method of modelling the vector of first preferences. This version, called the Dirichlet covariate model, the parameters of the Dirichlet distribution can be estimated as a function of covariates, $\lambda_j = h_j(\bm{x})$.
+
+Dirichlet regression can be done in $R$ using the $DirichReg$ package, and parametric forms of $h(\bm{x})$ will be chosen.
 
 ## Change over time
-This is an area that requires some more thought. Current plans are to estimate models for each of the elections separately, and examine how the influence of factors differ across models. 
 
-An extension would be to track electorates over time - however this is tricky since electorate boundaries are changing across elections. It may be possible to gather votes from a different level of aggregation, like polling booths, and use a similar technique to $k{\text -}centroid \space mapping$ to create voting statistics for each election, based on the 2016 boundaries.
+This is an area that requires some more thought. Current plans are to estimate models for each of the elections separately, and examine how the influence of factors differ across models.
 
-## Model Assessment and Diagnostics
+An extension would be to track electorates over time - however this is tricky since electorate boundaries are changing across elections. It may be possible to gather votes from a different level of aggregation, like polling booths, and use a similar technique to $k$-centroid mapping to create voting statistics for each election, based on the 2016 boundaries.
+
+## Model assessment and diagnostics
+
 Tests for high leverage and goodness of fit will be done for each category of models, as will model selection within each category.
 
 High leverage will determine whether particular electorates are outliers from the rest, in terms of the relationship between socio-demographics and voting behaviour. Common tests for high leverage to be conducted will include Cook's distance and Likelihood distance [@RC82].

@@ -1,29 +1,3 @@
----
-chapter: 1
-knit: "bookdown::render_book"
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message=FALSE, cache=TRUE, warning = FALSE)
-# Load any R packages you need here
-library(ggplot2)
-library(tidyverse)
-library(sp)
-library(rgeos)
-library(jpeg)
-vis_df <- readRDS("/Users/Jeremy/Documents/R/MonashThesis-master-DONOTEDIT/data/vis_df.rds")
-vis_df$year <- as.factor(vis_df$year)
-levels(vis_df$year) <- c("2001", "2006", "2011", "2016")
-
-elec_poly <- readRDS("/Users/Jeremy/Documents/R/MonashThesis-master-DONOTEDIT/data/Brisbane_poly.rds")
-cens_poly <- readRDS("/Users/Jeremy/Documents/R/MonashThesis-master-DONOTEDIT/data/Census_poly.rds")
-cens_bris_poly <- readRDS("/Users/Jeremy/Documents/R/MonashThesis-master-DONOTEDIT/data/cens_bris_poly.rds")
-cens_grif_poly <- readRDS("/Users/Jeremy/Documents/R/MonashThesis-master-DONOTEDIT/data/cens_grif_poly.rds")
-cens_lill_poly <- readRDS("/Users/Jeremy/Documents/R/MonashThesis-master-DONOTEDIT/data/cens_lill_poly.rds")
-bris_int <- "/Users/Jeremy/Documents/R/MonashThesis-master-DONOTEDIT/data/bris_int_poly.rds"
-lill_int <- "/Users/Jeremy/Documents/R/MonashThesis-master-DONOTEDIT/data/lill_int_poly.rds"
-```
-
 # Introduction {#ch:intro}
 
 Over the last two decades the Australian demographic profile has changed significantly. An ageing population, higher levels of education across the board, soaring house prices, the list goes on. At the same time, the political landscape has been in a state of constant change, with the country recently experiencing four leadership changes in just a five year stretch. And yet the Australian support largely ebbs and flows between the two major parties vying for power.
@@ -34,24 +8,24 @@ This research will explore the relationships that exist between socio-demographi
 
 Socio-demographics are characteristics of a population, such as percentage breakdowns by age, gender, ethnicity, education level and income. The socio-demographic information used in this study is from the Australian Census of Population and Housing, a country-wide survey conducted every five years.
 
-Federal elections on the other hand, are conducted every three years. 
+Federal elections on the other hand, are conducted every three years.
 
 Utilising new tools in spatial analysis, this study aims to build socio-demographic profiles for each electorate, at election time, using the available Census information. On reviewing the literature, it appears that the approach of imputing electorate profiles that is proposed in this study is a new innovation in socio-political analysis.
 
 At the centre of this study are three key questions:
 
 1. What are the demographic factors that affect preference between the two major parties?
-
 2. What factors are linked with electorate support for the full political spectrum?
-
 3. How have these changed over time?
 
-There are three ways in which this research differs from other voting studies. Firstly, it uses spatial modelling tools to impute socio-demographic information for an election, using Census information from nearby years. Secondly, it considers predictive modelling for electorate voting behaviour, and thirdly it combines information for every election since 2001.  
+There are three ways in which this research differs from other voting studies. Firstly, it uses spatial modelling tools to impute socio-demographic information for an election, using Census information from nearby years. Secondly, it considers predictive modelling for electorate voting behaviour, and thirdly it combines information for every election since 2001.
 
 ## Data sources and mapping
+
 In order to impute socio-demographics at election time, the algorithm proposed in this research follows the dominant approach in spatial studies by overlaying maps that are in Geographic Information Software (GIS) format. Overlaying GIS maps is used in other analyses of Australian voting behaviour, and other fields including; strategic planning [@Valcik12], healthcare [@Ye17] and geosciences. Maps are collected from the Australian Bureau of Statistics and the Australian Electoral Commission.
 
 ## Modelling
+
 Answering question (1) involves modelling the preference between the two major political parties as a function of an electorate's socio-demographics. The vote for one of these parties, $TPP_i$, sits in the interval $[0,1]$, and can be modelled using a logistic transform, so that it maps on $\mathbb{R}$.
 
 Question (2) involves modelling the votes for multiple groups. The votes for each party in an electorate can be treated as a proportion of the total votes for that electorate. Denoting $FP_i$ as the proportion of vote for party $i$, then $\sum_{i=1}^D FP_i = 1$, for $D$ parties, making this a compositional dataset. Candidate approaches for modelling include the Dirichlet distribution and logratio transformations of the data.
@@ -59,5 +33,6 @@ Question (2) involves modelling the votes for multiple groups. The votes for eac
 Observing how these relationships change over time will be embedded in the models addressing questions (1) and (2).
 
 ## Reproducible and openly available
-All content produced in this study reproducible and data used is publicly available, so this project provides a resource for future research. A key deliverable is the contribution made to the $eechidna$ R package, which includes the GIS maps, data from both all censuses and elections, and the imputed socio-demographic electorate profiles at the time of each election. When the next elections and Censuses come around, the $eechidna$ package will provide a resource for anyone to conduct their own socio-political analysis. The name $eechidna$ is an acronym for 'Exploring Election and Census Highly Informative Data Nationally for Australia'.
+
+All content produced in this study reproducible and data used is publicly available, so this project provides a resource for future research. A key deliverable is the contribution made to the *eechidna* R package, which includes the GIS maps, data from both all censuses and elections, and the imputed socio-demographic electorate profiles at the time of each election. When the next elections and Censuses come around, the *eechidna* package will provide a resource for anyone to conduct their own socio-political analysis. The name *eechidna* is an acronym for 'Exploring Election and Census Highly Informative Data Nationally for Australia'.
 

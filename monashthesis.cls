@@ -19,8 +19,8 @@
 \newif\ifsinglesp@
 \newif\ifdoublesp@
 \newif\ifsingleside@
-\doublesp@true
-\singleside@false
+\doublesp@false
+\singleside@true
 \DeclareOption{singleside}{\singleside@true}
 \DeclareOption{doubleside}{\singleside@false}
 \DeclareOption{singlespace}{\singlesp@true}
@@ -37,7 +37,7 @@
 
 %% Page dimensions
 \ifsingleside@%
-  \usepackage[a4paper,left=3.5cm,right=2.5cm,top=2.5cm,bottom=3.5cm]{geometry}
+  \usepackage[a4paper,left=2.5cm,right=2.5cm,top=2.5cm,bottom=3.5cm]{geometry}
 \else%
   \usepackage[a4paper,left=3.5cm,right=2.5cm,top=2.5cm,bottom=3.5cm,twoside]{geometry}
 \fi%
@@ -99,7 +99,7 @@
 
 %% SPACING
 \RequirePackage{setspace}
-\spacing{1.5}
+\spacing{1.1}
 
 %% LINE AND PAGE BREAKING
 \sloppy
@@ -298,3 +298,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \raggedbottom
+
+\usepackage{todonotes}
