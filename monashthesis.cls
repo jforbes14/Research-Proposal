@@ -190,8 +190,7 @@
     \end{center}
     \vfill
     \begin{center}\Large
-        {A thesis submitted
-        for the degree of\\[0.3cm] \degreetitle}
+        {Research proposal\\[0.3cm] \degreetitle}
     \end{center}
     \vfill
     \begin{center}

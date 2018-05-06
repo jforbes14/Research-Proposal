@@ -1,15 +1,23 @@
 # A brief reflection and discussion {#ch:ReflectionDiscussion}
 
-To date, all effort has been directed towards gathering, cleaning and wrangling the data from the ABS and AEC into workable $R$ objects. Navigating the AEC and ABS websites to obtain the vote counts and Census data was relatively straightforward,  although the 2001 election required direct contact with the AEC, as it is not downloadable online. Finding the GIS maps for each event was a little more difficult, but could be sourced from various government websites after some searching.
+To date, nearly all effort has been directed towards gathering, cleaning and wrangling the data from the ABS and AEC into workable $R$ objects. Navigating the AEC and ABS websites to obtain the vote counts and Census data was relatively straightforward,  although the 2001 election required direct contact with the AEC, as it is not downloadable online. Finding the GIS maps for each event was a little more difficult, but could be sourced from various government websites after some searching.
 
 It was not immediately obvious that imputing socio-demographic profiles at election time would be a new idea. Having not worked with GIS maps, or any spatial data for that matter, understanding the structure of the GIS maps and developing a functioning algorithm has been the latest area of focus.
 
-Although I have not started running any models, but the investigation into appropriate analyses of compositional data has been very interesting. This too is an area I have not dealt with before. I look forward to applying these techniques.
+Although I have not started running any models, the investigation into appropriate analyses of compositional data has been very interesting. This too is an area I have not dealt with before. I look forward to applying these techniques.
 
 ## Limitations and improvements
 
-Estimating electorate profiles with the $k$-centroid mapping algorithm is a good place to start, but there are undoubtedly improvements that can be made to this approach. Perhaps gathering Census data at a statistical level of aggregation that is lower than electorates, and using these areas to overlay the election map may provide a more accurate imputation of the profiles.
+### Spatial dependencies
+It is highly likely that some level of spatial dependence in voting behaviour exists between neighbouring electorates. Further investigation into how to test and adjust for spatial dependencies is required.
 
-Matching polling booths with their Census equivalent, which is done in existing Australian socio-political studies, presents another way to model voter behaviour. However, modelling results at electorate level is still the key point of interest because they determine the results of Australian federal elections.
+### Census data with a lower level of aggregation
+Estimating electorate profiles with the $k$-centroid mapping algorithm is a good place to start, but there are undoubtedly improvements that can be made to this approach. Perhaps gathering Census data at a statistical level of aggregation that is lower than electorates, and using these areas to overlay the election boundaries may provide more accurate imputation of the election profiles.
 
-As mentioned in the modelling section, estimating the results within electorate boundaries from the 2016 election, for each of the previous elections would allow for the use of time series models. Fixed effects could then be estimated for each electorate. The issue here would be that the populations would not be the same across elections, but if there exists unobservable characteristics of an area, like goodwill towards a party, this may be able to be adjusted for. I intend to explore these avenues should time permit later in the year.
+### Fixing election boundaries
+A possible extension would be to numerically track electorates over time - however this is tricky since electorate boundaries are changing across elections, and are not standardised. By fixing election boundaries from a common election period (e.g. 2016), socio-demographics profiles and election results could be imputed for all elections, using a technique similar to $k$-centroid mapping. The combined data could then be treated as panel data, and time series models could be used - including fixed effects for each electorate. This would allow for models to account for an area's unobservable characteristics, like goodwill towards a party. 
+
+### Analysis of polling booths
+Matching polling booths with their Census equivalent, which is done in existing Australian socio-political studies, presents another way to model voter behaviour. However, modelling results at electorate level is still the key point of interest because they determine the results of Australian federal elections. It is unclear whether this higher degree of resolution will provide any greater insight.
+
+I intend to explore these ideas should time permit later in the year.

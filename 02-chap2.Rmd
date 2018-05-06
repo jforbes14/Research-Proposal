@@ -2,19 +2,21 @@
 
 ## Spatial analysis of Australian elections
 
-Existing spatial analyses of Australian elections appear to focus on a single federal election, with socio-demographic information pulled from the nearest census. This approach is used in @Stim06, and is adapted to an online e-research platform by @Liao09. Both use GIS to connect Census and election data. However, both Stimson et al. and Liao et al. use information disaggregated to polling booth locations - a greater level of disaggregation than electorates, which the grouping of focus of this study.
+Existing spatial analyses of Australian elections appear to focus on a single federal election, with socio-demographic information pulled from the nearest census. This approach is used in @Stim06, and is adapted to an online e-research platform by @Liao09. Both use GIS to connect Census and election data. However, @Stim06 and @Liao09 use information disaggregated to polling booth locations - a greater level of disaggregation than electorates, which is the grouping of focus of this study.
 
-Seemingly vacant in Australian studies is the examination of these socio-political relationships over time. It appears that no study has either attempted to create a collection of socio-demographics for multiple elections, or connect information from multiple censuses to a single election - an approach that will be explored for the election years in which a Census does not fall.
+Seemingly absent from Australian studies is the examination of these socio-political relationships over time. It appears that no study has either attempted to create a collection of socio-demographics for multiple elections, or to connect information from multiple Censuses to a single election - an approach that will be explored for the election years in which a Census does not fall.
 
-A popular approach in single-election studies is to focus analysis on a single electoral division [@Forrest01], or a particular political party [@Davis98]. @Stim12 expand on this by modelling relationships between population variables and voter support for political parties, using univariate visualisations, linear regressions, summary statistics and discriminant analysis. Discriminant analysis is also used by @Stim06 because it aims to distinguish between political parties in their voter support, rather than predict how areas would vote.
+A popular approach in single-election studies is to focus analysis on a single electoral division [@Forrest01], or on a particular political party [@Davis98]. @Stim12 expand on this by modelling relationships between population variables and voter support for political parties, using univariate visualisations, simple linear regressions, summary statistics and discriminant analysis. Discriminant analysis is also used by @Stim06 because it aims to distinguish between political parties in their voter support, rather than to predict how areas would vote.
 
 ## Modelling with compositional data
 
-In order to answer research questions (1) and (2), this study focuses on regression models for inference and prediction. Response variables for these questions are non-negative and sum to unit, making them compositional with $D$ components [@PG11].
+In order to answer research questions (1) and (2), this study focuses on regression models for inference and prediction. Response variables for these questions are non-negative and sum to unity, making them compositional with $D$ components [@PG11].
 
 The two popular approaches to modelling compositional data are by way of logratio analysis, and the Dirichlet distribution.
 
-Logratio analysis [@JA86] uses a transformation of the components, which then can be treated as a multivariate distribution. Available transformation methods are additive, centred and isometric [@Ego03]. A common method is to treat the transformed data as multivariate normal, which allows for covariation between the parts. In modelling the 2001 Australian federal election, @Chong05 adopt this technique, using an additive logratio transformation.
+Logratio analysis [@JA86] uses a transformation of the components, which then can be treated as a multivariate distribution. The transformed components form the response variable in a regression model. Available transformation methods are additive, centred and isometric [@Ego03]. 
 
-The Dirichlet distribution also provides a candidate for modelling the distribution of votes, as the components estimated must sum to one. @Campbell87 propose a covariate extension which allows for parameters to be functions of covariates. This approach is adopted by @Gueor08 in estimating component scores of a psychiatric assessment, with parametric regression used to estimate the Dirichlet parameters.
+A common method is to treat the transformed data as conditionally multivariate normal, which allows for covariation between the parts, which is done by @Chong05 in modelling the 2001 Australian federal election (using an additive logratio).
+
+The Dirichlet distribution also provides a candidate for modelling the distribution of votes, as the components estimated must sum to one. @Campbell87 propose a covariate extension which allows for parameters to be functions of covariates. This approach is adopted by @Gueor08 in modelling component scores of a psychiatric assessment, with a parametric regression used to estimate the Dirichlet parameters.
 

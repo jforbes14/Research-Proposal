@@ -2,19 +2,19 @@
 
 Now that estimated socio-demographic profiles have been obtained for each election, we begin modelling to answer the questions that were set out in the introduction:
 
-1. What are the demographic factors that affect preference between the two major parties?
+1. What demographic factors affect preference between the two major parties?
 2. What factors are linked with electorate support for the full political spectrum?
 3. How have these changed over time?
 
 ## Major party preference
 
-Question (1) is concerned with modelling the two party preferred vote, $TPP$, to analyse preference between Labor and Liberal/National parties. Since $TPP_{Labor} + TPP_{Liberal} = 1$, we can focus our models on the response $TPP_Labor$, which sits in the interval $(0,1)$. This can be modelled using a logistic normal distribution:
-$$f(TPP) = \frac{1}{\sigma \sqrt{2 \pi}} \frac{1}{TPP(1-TPP)}\exp(-\frac{(logit(TPP)-\mu)^2}{2\sigma^2}),$$
-where $logit(TPP)$ is the logistic transformation $ln(\frac{TPP}{1-TPP})$.
+Question (1) is concerned with modelling the two party preferred vote, $TPP$, to analyse preference between Labor and Liberal/National parties. Since $TPP_{Labor} + TPP_{Liberal} = 1$, we can focus our models on the response $TPP_{Labor}$, which sits in the interval $(0,1)$. 
 
-The mean $\mu$ is a parametric function of the socio-demographics $\bm{X}$ of each electorate $\mu = f(\bm{x})$. We can then use basic regression techniques to estimate the regression coefficients, by way of the `lm()` function.
+Applying the logistic transform to $TPP_{Labor}$, given by $ln(\frac{TPP}{1-TPP})$, creates a response variable that now maps onto the real space, $\mathbb{R}$. The transformed response can then be treated as being normally distributed, with mean $\mu$ and variance $\sigma^2$. 
 
-Inference can then be conducted on the output, in order to determine which factors are statistically significant, and their marginal effects on the two party preferred vote.
+The mean $\mu$ is taken as a parametric function of the socio-demographics $\bm{x}$ of each electorate, i.e. $\mu = f(\bm{x})$. We can then use basic regression techniques to estimate the regression coefficients, by way of the `lm()` function.
+
+Inference can then be conducted on the output, in order to determine which factors are statistically significant, and their marginal effects on the two party preferred vote will be computed.
 
 ## The full spectrum
 
@@ -33,11 +33,11 @@ Both methods will be used to produce models for first preference, and I will dra
 
 Logratio analysis (Aitchison 1986) uses the transformation of the response $\bm{v}_i$ to $\bm{w}_i$, where $\bm{w}_i \in \mathbb{R}^D$ (or $\mathbb{R}^{D-1}$), so $\dim(\bm{w}_i) \text{ is } D\times1 \text{ or } (D-1) \times 1$, depending on the transformation method. To obtain $\bm{w} =  (w_{i1}, w_{i2}, \dots, w_{iD})$ or $\bm{w} =  (w_{i1}, w_{i2}, \dots, w_{i(D-1)})$ there are three available mappings: additive, centred and isometric. Each of these mapping techniques will be tested to see which performs best, and which is easily interpretable.
 
-Note that the $D=2$ case using the additive transformation is the same as doing a logistic transform, so answering question (1) is following the same method.
+Note that the $D=2$ case using the additive transformation is the same as doing a logistic transform, so answering question (1) is effectively following the same method.
 
 The transformed $\bm{w}_i$ can be modelled as multivariate normal, $\bm{w}_i \sim N(\bm{\mu}_i, \bm{\Sigma})$, where each component has a different mean modelled as a function of socio-demographics, $\bm{\mu}_i = f(\bm{x}_i)$. Parametric specifications of $f(\bm{x}_i)$ will be used. Further investigation is required into a suitable functions for estimating the coefficients in $f(\bm{x}_i)$ and $\bm{\Sigma}$.
 
-More on the three transformation methods can be found in the appendix \@ref{ch:appendix}.
+More on the three transformation methods can be found in the appendix D.
 
 ### Dirichlet covariate modelling
 
@@ -45,19 +45,27 @@ A modified version of the Dirichlet distribution [@Campbell87] provides another 
 
 Dirichlet regression can be done in $R$ using the $DirichReg$ package, and parametric forms of $h(\bm{x})$ will be chosen.
 
-## Change over time
+## Changes over time
 
-This is an area that requires some more thought. Current plans are to estimate models for each of the elections separately, and examine how the influence of factors differ across models.
+This is an area that requires some more thought. The current plan is to use two different approaches to model elections.
 
-An extension would be to track electorates over time - however this is tricky since electorate boundaries are changing across elections. It may be possible to gather votes from a different level of aggregation, like polling booths, and use a similar technique to $k$-centroid mapping to create voting statistics for each election, based on the 2016 boundaries.
+1. Single election models
+Each election will be treated as a cross-sectional data set, and models for each election will be estimated separately. Inference will be conducted to determine which factors have consistent effects across elections, and which have varying effects.
+
+2. Combining elections
+A combined data set, containing information on all six elections, will be treated as a pooled cross-section - as we have established that electorates change over time. Models will then include time dummies and time-varying coefficients for selected covariates. Approach 1 will inform this selection.
+
+A possible extension would be to numerically track electorates over time - however this is tricky since electorate boundaries are changing across elections, and are not standardised. It may be possible to gather votes from a different level of aggregation, like polling booths, and use a similar technique to $k$-centroid mapping to create voting statistics for each election, based on the 2016 boundaries.
 
 ## Model assessment and diagnostics
 
 Tests for high leverage and goodness of fit will be done for each category of models, as will model selection within each category.
 
-High leverage will determine whether particular electorates are outliers from the rest, in terms of the relationship between socio-demographics and voting behaviour. Common tests for high leverage to be conducted will include Cook's distance and Likelihood distance [@RC82].
+High leverage will determine whether particular electorates are outliers from the rest, in terms of the relationship between socio-demographics and voting behaviour. Tests for high leverage to be conducted will include Cook's distance and Likelihood distance [@RC82].
 
 Goodness of fit tests will determine how well the data fits the imposed model structure. Tests will include Pearson's Chi-Square and Aitchison's ${\text R}^2$ measure of total variability [@JA86].
 
 Comparative model assessment criteria will include Aikaike Information Criteria (AIC) and the Likelihood-ratio test, in order to determine the best models from each category.
+
+A neural network model may also be used in residual diagnostics.
 

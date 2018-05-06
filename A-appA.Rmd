@@ -1,5 +1,11 @@
 \appendix
 
+# Raw ABS Census data snapshot
+
+```{r excel-demo, fig.align="left", fig.cap="Screenshot of excel document containing responses to a question from the 2004 Census", out.width="80%"}
+knitr::include_graphics("figures/excel-screenshot.png")
+```
+
 # Socio-demographic metrics for each electorate {#ch:appendix}
 
 Derived from ABS Census data, spanning years 2001--2016.
@@ -238,6 +244,9 @@ ggplot(filter(vis_df, measure %in% c(levels(as.factor(vis_df$measure))[c(40:45)]
 
 
 # Transformation methods for logratio analysis
+Denote the vector holding votes for each party $j \in {1,...,D}$ in electorate $i$ as:
+$$\bm{v}_i = (v_{i1},v_{i2},...,v_{iD})$$
+where $\sum_{j=1}^D v_{ij} = 1$
 
 ### Additive Logratio {-}
 
@@ -284,10 +293,4 @@ $$
 where $\bm{M}$ is a matrix of $D$ rows and $D-1$ columns such that $\bm{M} \cdot \bm{M}^t = \bm{I}_{D-1}$. $\bm{I}_{D-1}$ is the identity matrix of $D-1$ elements.
 Transform back to $\bm{v}_i$ as
 : $\bm{v}_i = \exp(\bm{w}_i \space \cdot \space {\bm{M}^{-1}})$
-
-# Raw ABS Census data snapshot
-
-```{r excel-demo, fig.align="left", fig.cap="Screenshot of excel document containing responses to a question from the 2004 Census", out.width="80%"}
-knitr::include_graphics("figures/excel-screenshot.png")
-```
 

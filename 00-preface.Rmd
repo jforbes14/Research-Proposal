@@ -2,8 +2,9 @@
 
 This document is a research proposal, intended for submission as part of the journey that is EBS Honours 2018.
 
-The research proposed is an examination of the relationships that exist between socio-demographics and voting behaviour in Australian federal elections, and how this has changed over time. Considerations are The data used in this study from every election and Census conducted since 2001.
+The research proposed is an examination of the relationships that exist between socio-demographics and voting behaviour in Australian federal elections, and how this has changed over time. Used in this study is information from each election and Census since 2001.
 
+Data used in this study is available online from the Australian Bureau of Statistics, and the Australian Electoral Commission. 
 
 
 \clearpage\pagenumbering{arabic}\setcounter{page}{1}
